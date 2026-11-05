@@ -1,0 +1,31 @@
+[project]
+name = "a-study-on-pytorch"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.5.4",
+    "pandas>=3.1.1",
+    "torch>=2.14",
+    "torchvision",
+]
+
+# Windows & Linux -> CUDA 13.0 wheels; macOS -> default PyPI wheels (CPU/MPS)
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu130", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+torchvision = [
+    { index = "pytorch-cu130", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+]
